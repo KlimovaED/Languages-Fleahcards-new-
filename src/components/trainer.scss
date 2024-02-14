@@ -1,0 +1,43 @@
+.trainer__container{
+    position: relative;
+    width: 90%;
+    margin: auto ;
+    height: 90vh;
+    display: flex;
+    .selection-info{
+        padding-top: 20px;
+        width: 20%;
+        .lingua{
+            font-family: "Montserrat", sans-serif;
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            font-size: 1rem;
+            background-color:rgba(79, 36, 164, 0.653) ;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            box-shadow: rgba(53, 20, 136, 0.2) 0px 12px 28px 0px, rgba(64, 11, 117, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+        }
+        
+    }
+    .game__container{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.trainer__container::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    left: -100px;
+    bottom: -40px;
+    width: 400px;
+    height: 400px;
+    opacity: 0.7;
+    background-image: url('https://img.freepik.com/free-vector/speech-therapy-abstract-concept-vector-illustration-speech-pathology-therapy-improve-language-development-delay-speaking-disability-treatment-tongue-exercise-at-home-abstract-metaphor_335657-4087.jpg?w=1060&t=st=1707828648~exp=1707829248~hmac=7920d66a7ec4aed361ed0e104a961caa8f8071820bfc9f208dd6f494b19d3624');
+    background-size: 400px 400px;
+}

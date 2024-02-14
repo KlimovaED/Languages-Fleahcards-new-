@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.game__box{
+    background-color: white;
+    width: 70%;
+    height: 400px;
+    border: 0.5px solid rgba(79, 36, 164, 0.309);
+    border-radius: 10px;
+    box-shadow: rgba(53, 20, 136, 0.2) 0px 12px 28px 0px, rgba(64, 11, 117, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+.buttons{
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+    width: 70%;
+    justify-content:space-between;
+    .btn{
+        cursor: pointer;
+        height: 40px;
+        width: 140px;
+        background-color:rgba(79, 36, 164, 0.653);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: "Montserrat", sans-serif;
+        box-shadow: rgba(53, 20, 136, 0.2) 0px 12px 28px 0px, rgba(64, 11, 117, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    }
+}
