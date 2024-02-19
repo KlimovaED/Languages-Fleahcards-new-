@@ -5,7 +5,7 @@ import React from 'react';
 class Trainer extends React.Component {
   render(){
     return (
-    <section className="trainer__container">
+    <section id='trainer' className="trainer__container">
     <div className='selection-info'>
     <select className='lingua'>
       <option disabled selected>-- Выберите язык --</option>

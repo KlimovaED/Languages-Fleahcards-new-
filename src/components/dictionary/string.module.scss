@@ -1,0 +1,23 @@
+@import '../vars.scss';
+
+.word__string{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap:1%;
+    .word{
+font-family: $FontFamily;
+color: $FontColor;
+font-size: 1.3rem;
+width: 245px;
+text-align: center;
+vertical-align: center;
+    }
+    .btn__edit{
+@include Btn-transparent();
+width: 140px;
+    }
+    .btn__delete{
+        @include Btn-colored();
+    }
+}

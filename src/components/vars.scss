@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+ @mixin Box{
+    border: 2px solid rgba(79, 36, 164, 0.653) ;
+    width: 250px;
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+}
+
+$FontColor: rgb(78, 36, 164);
+$BackgroundColor:rgba(79, 36, 164, 0.653);
+$FontFamily:"Montserrat", sans-serif;
+
+@mixin Btn-colored{
+    cursor: pointer;
+    height: 40px;
+    width: 120px;
+    background-color:$BackgroundColor;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+@mixin Btn-transparent{
+    cursor: pointer;
+    height: 40px;
+    width: 120px;
+    background-color:white;
+    color: $BackgroundColor;
+    border: 1.5px solid $BackgroundColor;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+}

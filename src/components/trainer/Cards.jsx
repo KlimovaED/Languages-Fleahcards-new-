@@ -1,5 +1,7 @@
 import React from 'react';
-import './cards.scss'
+import './cards.scss';
+
+
 import Card from './Card';
 
 class FlashCard extends React.Component {

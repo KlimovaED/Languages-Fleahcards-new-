@@ -1,0 +1,39 @@
+
+@import '../vars.scss';
+
+.dictionary__container{
+    margin-top: 5%;
+    min-height: 100vh;
+    width: 100%;
+    height: fit-content;
+    .dictionary__title{
+        text-align: center;
+        color: $FontColor;
+            font-size: 2rem;
+            font-family: $FontFamily;
+    }
+    .dictionary__content{
+        width: 90%;
+        margin: auto;
+        .dictionary__inputs{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .lingua,.word,.transcription,.translation{
+@include Box();
+            }
+            .btn__save{
+                @include Btn-colored();
+            }
+            .btn__reset{
+             @include Btn-transparent()
+            }
+        }
+        .result{
+            margin-top: 2%;
+            width: 100%;
+            
+        }
+    }
+}

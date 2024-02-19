@@ -1,3 +1,4 @@
+@import '../vars.scss';
 .trainer__container{
     position: relative;
     width: 90%;
@@ -13,7 +14,7 @@
             height: 40px;
             text-align: center;
             font-size: 1rem;
-            background-color:rgba(79, 36, 164, 0.653) ;
+            background-color: $BackgroundColor ;
             color: white;
             border-radius: 10px;
             border: none;
