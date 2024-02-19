@@ -51,7 +51,7 @@ function Dictionary(){
   }
  }
  const removeString = (id) =>{
-  setDatas(...datas.filter((data)=>data.id !== id));
+  setDatas(datas.filter((data)=>data.id !== id));
  }
 
     return (
@@ -94,7 +94,8 @@ function Dictionary(){
             </button>
           </form>
           <div id="dictionary__result" className={styles.result}>
-            {datas.map((data)=>{
+            {
+            datas.map((data)=>{
                 return(
                   <String
                   data={data}
