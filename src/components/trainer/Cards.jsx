@@ -12,6 +12,7 @@ class FlashCard extends React.Component {
 <Card
 word="fly"
 transcription="[flai]"
+translation = " летать"
 />
     </div>
     <div className='buttons'>

@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import '../vars.scss';
 
 .card__content{
     width: 60%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 5%;
     text-align: center;
     font-family: "Montserrat", sans-serif;
     .word{
@@ -13,5 +13,17 @@
     .transcription{
         font-size: 2rem;
         color: gray;
+        margin-bottom: 13%;
+    }
+    .translation {
+        font-size: 2rem;
+        color:rgb(4, 190, 4);
+        font-weight: 600;
+    }
+    .btn__result{
+        @include Btn-transparent();
+    }
+    .btn__result:hover{
+        @include Btn-colored();
     }
 }
