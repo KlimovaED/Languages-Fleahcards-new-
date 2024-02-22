@@ -23,7 +23,7 @@ setEdit(!edit);
             ...data.text, word: e.target.value,
         })}}  />
         <input type="text" className={styles.word__edit} value={data.text.transcription} onChange={(e)=> { onChange({
-            ...data.text, text: e.target.value,
+            ...data.text, transcription: e.target.value,
         })}} />
         <input  type="text" className={styles.word__edit} value={data.text.translation}  onChange={(e)=> { onChange({
             ...data.text,translation: e.target.value,
