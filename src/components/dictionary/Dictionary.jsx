@@ -43,12 +43,22 @@ function Dictionary(){
    hasError = true;
   }
   if(hasError===false){
-    const newItem = {
+    setDatas([...datas,{
       id:( Math.random().toString(36)),
       text: words,
-    }
-    setDatas([...datas,newItem]);
+    }]);
   }
+ }
+
+ const handleChangeString =(nextString) =>{
+const newStr = datas.map((data) => {
+    if(data.id === nextString.id){
+      return nextString;
+    }else{
+      return data;
+    }
+  })
+  setDatas(newStr);
  }
  const removeString = (id) =>{
   setDatas(datas.filter((data)=>data.id !== id));
@@ -100,6 +110,7 @@ function Dictionary(){
                   <String
                   data={data}
                   key={data.id}
+                  onChange={handleChangeString}
                   removeString={removeString}/>
                 )
               })

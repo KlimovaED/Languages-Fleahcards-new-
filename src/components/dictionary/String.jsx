@@ -1,11 +1,14 @@
 import styles from './string.module.scss';
 import React, { useState } from 'react';
 
-function String({data,removeString }){
+function String({data,removeString, onChange}){
+    
 
     const [edit,setEdit] =useState(false);
 
-    const handleEdit = ()=>{
+
+
+ const handleEdit = ()=>{
 setEdit(!edit);
     }
 
@@ -15,12 +18,19 @@ setEdit(!edit);
     <div key={data.id} className={styles.word__string}>
         {edit ? 
             <React.Fragment>
-    <p className={styles.word}>{data.text.lingua}</p>
-        <input  type="text"className={styles.word__edit} placeholder={data.text.word} />
-        <input type="text" className={styles.word__edit} placeholder={data.text.transcription}/>
-        <input  type="text" className={styles.word__edit} placeholder={data.text.translation}/>
-        <button type='button' className={styles.btn__edit} >Сохранить</button>
-        <button type='button' className={styles.btn__delete}>Отменить</button>
+        <p className={styles.word}>{data.text.lingua}</p>
+        <input  type="text"className={styles.word__edit} value={data.text.word} onChange={(e)=> { onChange({
+            ...data.text, word: e.target.value,
+        })}}  />
+        <input type="text" className={styles.word__edit} value={data.text.transcription} onChange={(e)=> { onChange({
+            ...data.text, text: e.target.value,
+        })}} />
+        <input  type="text" className={styles.word__edit} value={data.text.translation}  onChange={(e)=> { onChange({
+            ...data.text,translation: e.target.value,
+        })}}/>
+        <button type='button' className={styles.btn__edit} onClick={()=> handleEdit(false)} >Сохранить</button>
+        <button type='button' className={styles.btn__delete}  >Отменить</button>
+        {console.log(data)};
         </React.Fragment>
         : 
     (<React.Fragment>
@@ -36,6 +46,9 @@ setEdit(!edit);
     <hr/>
     </React.Fragment>
     )
+
+
+
 }
 
 export default String;
