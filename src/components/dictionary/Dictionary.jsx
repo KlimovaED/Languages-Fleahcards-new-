@@ -45,7 +45,10 @@ function Dictionary(){
   if(hasError===false){
     setDatas([...datas,{
       id:( Math.random().toString(36)),
-      text: words,
+      lingua: words.lingua,
+      word: words.word,
+      transcription: words.transcription,
+      translation: words.translation
     }]);
   }
  }
