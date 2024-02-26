@@ -8,8 +8,6 @@ function Card({data}){
     const changeTranslation = () =>{
     setChange(!change);
     }
-   
-
     return(
         <div key={data.id} className="card__content">
             <p className="word">{data.word}</p>
@@ -22,4 +20,5 @@ function Card({data}){
         </div>
     )
 }
+
 export default Card;

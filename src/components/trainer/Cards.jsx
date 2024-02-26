@@ -7,7 +7,7 @@ import wordJSON from './words.json';
 function FlashCard () {
 const [dictionarys,setDictionary] =useState([]);
 const [cards,setCards] = useState(wordJSON);
-  const[currentCardId,setCurrentCardId] = useState(1);
+  const[currentCardId,setCurrentCardId] = useState(0);
   const[currentCard, setCurrentCard] = useState({});
 
   useEffect(()=>{
