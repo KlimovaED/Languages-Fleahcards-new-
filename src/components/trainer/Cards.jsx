@@ -1,28 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './cards.scss';
-
-
 import Card from './Card';
+import wordJSON from './words.json';
 
-class FlashCard extends React.Component {
-    render(){
+
+function FlashCard () {
+const [dictionarys,setDictionary] =useState([]);
+const [cards,setCards] = useState(wordJSON);
+  const[currentCardId,setCurrentCardId] = useState(1);
+  const[currentCard, setCurrentCard] = useState({});
+
+  useEffect(()=>{
+    setCurrentCard(cards[currentCardId])
+  },[cards,currentCardId])
+
+const knowCard=()=>{
+ setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+};
+
+const nextCard =()=>{
+  setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+}
+const dontKnowCard=()=>{
+  setDictionary([...dictionarys,{
+    id:( Math.random().toString(36)),
+    lingua: currentCard.lingua,
+    word: currentCard.word,
+    transcription: currentCard.transcription,
+    translation: currentCard.translation
+  }]);
+  console.log(dictionarys);
+}
+
       return (
         <React.Fragment>
     <div className='game__box'>
-<Card
-word="fly"
-transcription="[flai]"
-translation = " летать"
-/>
+      <Card 
+      data={currentCard}/>
     </div>
     <div className='buttons'>
-        <button type='button' className='btn'>Не знаю</button>
-        <button type='button' className='btn'>Пропустить</button>
-        <button type='button' className='btn'>Знаю</button>
+        <button type='button' onClick={dontKnowCard} className='btn'>Не знаю</button>
+        <button type='button' onClick={nextCard} className='btn'>Пропустить</button>
+        <button type='button' onClick={knowCard}  className='btn'>Знаю</button>
     </div>
     </React.Fragment>
       );
     }
-    }
     
-    export default FlashCard;
+    export default  FlashCard;

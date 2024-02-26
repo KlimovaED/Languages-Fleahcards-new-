@@ -1,0 +1,35 @@
+[{
+    "id":"1",
+    "lingua":"english",
+    "word":"fly",
+    "transcription":"[flai]",
+    "translation":"летать"
+},
+{
+    "id":"2",
+    "lingua":"english",
+    "word":"hope",
+    "transcription":"[houp]",
+    "translation":"надежда"
+},
+{
+    "id":"3",
+    "lingua":"english",
+    "word":"interview",
+    "transcription":"[’intəvju:]",
+    "translation":"интервью"
+},
+{
+    "id":"4",
+    "lingua":"english",
+    "word":"lodger",
+    "transcription":"[’lɔdʒə]",
+    "translation":"квартирант"
+},{
+    "id":"5",
+    "lingua":"english",
+    "word":"miracle",
+    "transcription":"[’mirəkl]",
+    "translation":"чудо"
+}
+]

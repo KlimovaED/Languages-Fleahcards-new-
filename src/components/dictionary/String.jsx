@@ -6,17 +6,22 @@ function String({data,removeString, onChange}){
 
     const [edit,setEdit] =useState(false);
 
-
-
  const handleEdit = ()=>{
-setEdit(!edit);
-
+setEdit(true);
     }
+ const saveEdit =()=>{
+    setEdit(false);
+ }
+ const handleCancel =(e)=>{
+    setEdit(false);
+ }
+
 
 
     return( 
         <React.Fragment>
     <div key={data.id} className={styles.word__string}>
+        
         {edit ? 
             <React.Fragment>
         <p className={styles.word}>{data.lingua}</p>
@@ -29,8 +34,8 @@ setEdit(!edit);
         <input  type="text" className={styles.word__edit} value={data.translation}  onChange={(e)=> { onChange({
             ...data,translation: e.target.value,
         })}}/>
-        <button type='button' className={styles.btn__edit} onClick={()=> handleEdit(false)} >Сохранить</button>
-        <button type='button' className={styles.btn__delete}  >Отменить</button>
+        <button type='button' className={styles.btn__edit} onClick={saveEdit} >Сохранить</button>
+        <button type='button' className={styles.btn__delete} onClick={handleCancel} >Отменить</button>
         </React.Fragment>
         : 
     (<React.Fragment>
