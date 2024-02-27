@@ -1,6 +1,6 @@
 import './card.scss';
 import React from 'react';
-import  fadeIn  from 'react-animations'
+import { Fade } from "react-awesome-reveal";
 
 
 
@@ -14,11 +14,10 @@ function Card({data,showTranslation,setShowTranslation}){
             <p className="word">{data.word}</p>
             <p className="transcription">{data.transcription}</p>
             {
-                showTranslation  ? <p className='translation'>{data.translation}</p> 
+                showTranslation  ? <Fade><p className='translation'>{data.translation}</p></Fade>
                         : <button onClick={changeTranslation} type='button' className='btn__result'>Показать</button>
             }
         </div>
-
     )
 }
 
