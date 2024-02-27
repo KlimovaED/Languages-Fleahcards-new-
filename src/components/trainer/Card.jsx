@@ -1,23 +1,24 @@
 import './card.scss';
-import React, {useState} from 'react';
+import React from 'react';
+import  fadeIn  from 'react-animations'
 
-function Card({data}){
 
-    const [change, setChange] = useState(false);
+
+function Card({data,showTranslation,setShowTranslation}){
 
     const changeTranslation = () =>{
-    setChange(!change);
+    setShowTranslation(true)
     }
     return(
-        <div key={data.id} className="card__content">
+    <div key={data.id} className="card__content">
             <p className="word">{data.word}</p>
             <p className="transcription">{data.transcription}</p>
             {
-                change  ? <p className='translation'>{data.translation}</p> 
+                showTranslation  ? <p className='translation'>{data.translation}</p> 
                         : <button onClick={changeTranslation} type='button' className='btn__result'>Показать</button>
             }
-            
         </div>
+
     )
 }
 

@@ -4,11 +4,13 @@ import Card from './Card';
 import wordJSON from './words.json';
 
 
+
 function FlashCard () {
 const [dictionarys,setDictionary] =useState([]);
 const [cards,setCards] = useState(wordJSON);
   const[currentCardId,setCurrentCardId] = useState(0);
   const[currentCard, setCurrentCard] = useState({});
+  const [showTranslation,setShowTranslation] = useState(false);
 
   useEffect(()=>{
     setCurrentCard(cards[currentCardId])
@@ -16,11 +18,15 @@ const [cards,setCards] = useState(wordJSON);
 
 const knowCard=()=>{
  setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+ setShowTranslation(false);
 };
 
 const nextCard =()=>{
   setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+  setShowTranslation(false);
 }
+
+
 const dontKnowCard=()=>{
   setDictionary([...dictionarys,{
     id:( Math.random().toString(36)),
@@ -36,6 +42,8 @@ const dontKnowCard=()=>{
         <React.Fragment>
     <div className='game__box'>
       <Card 
+      showTranslation={showTranslation}
+      setShowTranslation={setShowTranslation}
       data={currentCard}/>
     </div>
     <div className='buttons'>
