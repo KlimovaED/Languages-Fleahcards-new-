@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
 import { useState } from "react";
-import String from "./String";
+import String from "../string/String";
 
 function Dictionary(){
 

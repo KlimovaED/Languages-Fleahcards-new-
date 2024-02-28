@@ -1,7 +1,7 @@
 import './App.scss';
-import Header from './components/header/headers';
-import Trainer from './components/trainer/trainer';
-import Dictionary from './components/dictionary/Dictionary';
+import Header from './components/header/Headers';
+import Trainer from './components/trainer/trainer/Trainer';
+import Dictionary from './components/dictionary/dictionary/Dictionary';
 
 function App() {
   return (

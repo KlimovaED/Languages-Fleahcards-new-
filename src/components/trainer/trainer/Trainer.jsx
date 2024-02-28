@@ -1,4 +1,4 @@
-import FlashCard from './Cards'
+import FlashCard from '../cards/Cards'
 import './trainer.scss';
 import React from 'react';
 

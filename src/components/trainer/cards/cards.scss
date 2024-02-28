@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import '../vars.scss';
+@import '/src/components/vars.scss';
+
+.counter-word{
+    margin-bottom: 2%;
+    color: $FontColor;
+    font-family: $FontFamily;
+    font-size: 1.2rem;
+    font-style: oblique;
+}
+
 .game__box{
     background-color: white;
     width: 70%;

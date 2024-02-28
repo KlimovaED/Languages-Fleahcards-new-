@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './cards.scss';
-import Card from './Card';
-import wordJSON from './words.json';
+import Card from '../card/Card';
+import wordJSON from '../words.json';
 
 
 function FlashCard () {
@@ -16,15 +16,14 @@ const [cards,setCards] = useState(wordJSON);
   },[cards,currentCardId])
 
 const knowCard=()=>{
- setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+ setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 0));
  setShowTranslation(false);
 };
 
 const nextCard =()=>{
-  setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 1));
+  setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 0));
   setShowTranslation(false);
 }
-
 
 const dontKnowCard=()=>{
   setDictionary([...dictionarys,{
@@ -39,6 +38,7 @@ const dontKnowCard=()=>{
 
       return (
         <React.Fragment>
+          <span className="counter-word">{currentCardId+1} / {cards.length}</span>
     <div className='game__box'>
       <Card 
       showTranslation={showTranslation}
