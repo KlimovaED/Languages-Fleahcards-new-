@@ -1,14 +1,27 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
 import { useState} from "react";
+import { useEffect } from "react";
 import String from "../string/String";
-import fail from './fail.json';
+
 
 
 function Dictionary(){
+  const [datas, setDatas] = useState([]);
 
-  const [datas, setDatas] = useState(fail);
+const getDates = async()=>{
+try{
+  await fetch("http://localhost:3000/fail.json")
+  .then(response => response.json())
+  .then(data => setDatas(data));
+}catch(error){
+  console.log(error);
+}
+}
 
+useEffect(()=>{
+getDates();
+},[]);
 
 
   const [words,setWords]= useState({ lingua:'',word:'',

@@ -4,6 +4,7 @@ import Card from '../card/Card';
 import wordJSON from '../words.json';
 
 
+
 function FlashCard () {
 const [dictionarys,setDictionary] =useState([]);
 const [cards,setCards] = useState(wordJSON);
