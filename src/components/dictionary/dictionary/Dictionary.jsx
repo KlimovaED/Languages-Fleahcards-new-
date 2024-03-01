@@ -1,11 +1,15 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
-import { useState } from "react";
+import { useState} from "react";
 import String from "../string/String";
+import fail from './fail.json';
+
 
 function Dictionary(){
 
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState(fail);
+
+
 
   const [words,setWords]= useState({ lingua:'',word:'',
     transcription:'',

@@ -1,0 +1,61 @@
+@import '../vars.scss';
+
+.main-page{
+    min-height: 70vh;
+    height: fit-content;
+    .main-page__container{
+        width: 80%;
+        margin: auto;
+        .main-page__content{
+            width: 60%;
+            margin-top: 10%;
+            .main-page__title{
+            font-family: $FontFamily;
+            color: $FontColor;
+            font-size: 3rem;
+            }
+        .main-page__subtitle{
+            font-family: $FontFamily;
+            color: $FontColor;
+            font-size: 1.5rem;
+            opacity: 0.4;
+            font-weight: 400;
+        }
+        .main-page__buttons{
+            margin-top: 25%;
+            display: flex;
+            gap: 5%;
+            .btn__sing-up{
+                @include Btn-colored();
+                height: 50px;
+                width: 150px;
+                font-size: 1.2rem;
+                
+
+            }
+            .btn__registration{
+                @include Btn-transparent();
+                height: 50px;
+                width: 250px;
+                font-size: 1.2rem;
+            }
+        .btn:hover{
+            transform: scale(1.1);
+        }
+        }
+        }
+    }
+}
+.main-page::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    right: 10px;
+    bottom: 40px;
+    min-width: 500px;
+    width: 50%;
+    height: 80%;
+    opacity: 0.8;
+    background-image: url('https://img.freepik.com/free-vector/digital-translator-abstract-concept-illustration_335657-3769.jpg?t=st=1709215559~exp=1709219159~hmac=c1961f37c5a7c64f5df2c8d87b68691529cc3cc4e40cd4d46e8b28eaff185f0f&w=1060');
+    background-size: 100% 100%;
+}

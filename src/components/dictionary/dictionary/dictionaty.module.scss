@@ -6,6 +6,19 @@
     min-height: 100vh;
     width: 100%;
     height: fit-content;
+    .dictionary__lingua{
+        font-family: "Montserrat", sans-serif;
+        margin-left: 5.5%;
+        width: 15%;
+        height: 40px;
+        text-align: center;
+        font-size: 1rem;
+        background-color: $BackgroundColor ;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        box-shadow: rgba(53, 20, 136, 0.2) 0px 12px 28px 0px, rgba(64, 11, 117, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    }
     .dictionary__title{
         text-align: center;
         color: $FontColor;

@@ -5,7 +5,7 @@ import React from 'react';
 class Trainer extends React.Component {
   render(){
     return (
-    <section id='trainer' className="trainer__container">
+    <main id='trainer' className="trainer__container">
     <div className='selection-info'>
     <select className='lingua'>
       <option disabled selected>-- Выберите язык --</option>
@@ -19,7 +19,7 @@ class Trainer extends React.Component {
     <div className='game__container'>
     <FlashCard />
     </div>
-    </section>
+    </main>
 
     );
   }
