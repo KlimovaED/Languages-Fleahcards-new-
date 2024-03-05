@@ -5,14 +5,17 @@ function String({data,removeString, onChange}){
     
 
     const [edit,setEdit] =useState(false);
+    const [originalData, setOrigonalData] = useState(data);
 
  const handleEdit = ()=>{
+    setOrigonalData(data);
 setEdit(true);
     }
  const saveEdit =()=>{
     setEdit(false);
  }
  const handleCancel =(e)=>{
+    onChange(originalData);
     setEdit(false);
  }
 
