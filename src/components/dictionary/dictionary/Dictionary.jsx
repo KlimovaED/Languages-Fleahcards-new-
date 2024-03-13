@@ -29,28 +29,16 @@ getDates();
     translation:''})
 
   function onChangeWord(ev){
-    setWords({ lingua:words.lingua, word:ev.target.value,
-      transcription:words.transcription,
-      translation:words.translation
-    })
+    setWords({...words, word:ev.target.value})
   }
   function onChangeTranscription(ev){
-    setWords({lingua:words.lingua, word:words.word,
-      transcription:ev.target.value,
-      translation:words.translation
-    })
+    setWords({...words, transcription:ev.target.value})
   }
   function onChangeTranslation(ev){
-    setWords({lingua:words.lingua, word:words.word,
-      transcription:words.transcription,
-      translation:ev.target.value
-    })
+    setWords({...words, translation:ev.target.value})
   }
   function onChangeSelect(ev){
-    setWords({lingua:ev.target.value, word:words.word,
-      transcription:words.transcription,
-      translation:words.translation
-    })
+    setWords({...words, lingua:ev.target.value})
   }
 
  const onSubmitForm = (event) =>{
@@ -59,7 +47,7 @@ getDates();
   if(words.word===""||words.lingua ===""||words.transcription ===""||words.translation ==="" ){
    hasError = true;
   }
-  if(hasError===false){
+  if(!hasError){
     setDatas([...datas,{
       id:( Math.random().toString(36)),
       lingua: words.lingua,
@@ -67,17 +55,13 @@ getDates();
       transcription: words.transcription,
       translation: words.translation
     }]);
+    setWords({lingua:'', word:'', transcription:'', translation:''})
   }
  }
 
  const handleChangeString =(nextString) =>{
-const newStr = datas.map((data) => {
-    if(data.id === nextString.id){
-      return nextString;
-    }else{
-      return data;
-    }
-  })
+const newStr = datas.map((data) => 
+    data.id === nextString.id ? nextString : data);
   setDatas(newStr);
  }
  const removeString = (id) =>{
@@ -89,10 +73,8 @@ const newStr = datas.map((data) => {
         <h1 className={styles.dictionary__title}>Словарь</h1>
         <div on className={styles.dictionary__content}>
           <form onSubmit={onSubmitForm} name="formWords" className={styles.dictionary__inputs}>
-            <select className={styles.lingua} onChange={onChangeSelect}>
-              <option disabled selected>
-                -- Выберите язык --
-              </option>
+            <select className={styles.lingua} onChange={onChangeSelect} value={words.lingua} >
+              <option value="" disabled>-- Выберите язык --</option>
               <option value="English">Английский</option>
               <option value="Italian">Итальянский</option>
               <option value="French">Французский</option>
