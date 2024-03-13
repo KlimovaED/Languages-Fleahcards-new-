@@ -23,7 +23,9 @@
     .btn__result{
         @include Btn-transparent();
     }
+    
     .btn__result:hover{
         @include Btn-colored();
     }
+    
 }

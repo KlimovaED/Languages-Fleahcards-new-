@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import './cards.scss';
 import Card from '../card/Card';
 import wordJSON from '../words.json';
@@ -11,9 +11,16 @@ const [cards,setCards] = useState(wordJSON);
   const[currentCardId,setCurrentCardId] = useState(0);
   const[currentCard, setCurrentCard] = useState({});
   const [showTranslation,setShowTranslation] = useState(false);
+  const [count,setCount] = useState(0);
+
+  const countWords = ()=>{
+setCount((count)=> count+1);
+  }
+  
+  
 
   useEffect(()=>{
-    setCurrentCard(cards[currentCardId])
+    setCurrentCard(cards[currentCardId]);
   },[cards,currentCardId])
 
 const knowCard=()=>{
@@ -44,13 +51,16 @@ const dontKnowCard=()=>{
       <Card 
       showTranslation={showTranslation}
       setShowTranslation={setShowTranslation}
-      data={currentCard}/>
+      data={currentCard}
+      countWords={countWords}
+      />
     </div>
     <div className='buttons'>
         <button type='button' onClick={dontKnowCard} className='btn'>Не знаю</button>
         <button type='button' onClick={nextCard} className='btn'>Пропустить</button>
         <button type='button' onClick={knowCard}  className='btn'>Знаю</button>
     </div>
+    <p className='learned-words'> За эту тренировку вы выучили : {count} {count===1?"слово":""} {( count === 0||count > 4) ?"слов":""} {( count > 1 && count < 5 ) ?"слова":""} </p>
     </React.Fragment>
       );
     }
