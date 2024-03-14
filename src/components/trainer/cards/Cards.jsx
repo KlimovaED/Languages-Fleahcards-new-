@@ -13,6 +13,7 @@ const [cards,setCards] = useState(wordJSON);
   const [showTranslation,setShowTranslation] = useState(false);
   const [count,setCount] = useState(0);
 
+
   const countWords = ()=>{
 setCount((count)=> count+1);
   }

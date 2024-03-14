@@ -1,9 +1,15 @@
 import './card.scss';
-import React  from 'react';
+import React, {useEffect, useRef} from 'react';
 import { Fade } from "react-awesome-reveal";
 
 
 function Card({data,showTranslation,setShowTranslation,countWords}){
+
+    const btnRef = useRef(null);
+
+useEffect(()=>{
+    btnRef.current.focus();
+},[data]);
 
     const changeTranslation = () =>{
     setShowTranslation(true);
@@ -15,7 +21,7 @@ function Card({data,showTranslation,setShowTranslation,countWords}){
             <p className="transcription">{data.transcription}</p>
             {
                 showTranslation  ? <Fade><p className='translation'>{data.translation}</p></Fade>
-                        : <button onClick={changeTranslation} type='button' className='btn__result'>Показать</button>
+                        : <button  ref={btnRef} onClick={changeTranslation} type='button' className='btn__result'>Показать</button>
             }
         </div>
     )
