@@ -29,16 +29,28 @@ getDates();
     translation:''})
 
   function onChangeWord(ev){
-    setWords({...words, word:ev.target.value})
+    setWords({ lingua:words.lingua, word:ev.target.value,
+      transcription:words.transcription,
+      translation:words.translation
+    })
   }
   function onChangeTranscription(ev){
-    setWords({...words, transcription:ev.target.value})
+    setWords({lingua:words.lingua, word:words.word,
+      transcription:ev.target.value,
+      translation:words.translation
+    })
   }
   function onChangeTranslation(ev){
-    setWords({...words, translation:ev.target.value})
+    setWords({lingua:words.lingua, word:words.word,
+      transcription:words.transcription,
+      translation:ev.target.value
+    })
   }
   function onChangeSelect(ev){
-    setWords({...words, lingua:ev.target.value})
+    setWords({lingua:ev.target.value, word:words.word,
+      transcription:words.transcription,
+      translation:words.translation
+    })
   }
 
  const onSubmitForm = (event) =>{
@@ -55,7 +67,6 @@ getDates();
       transcription: words.transcription,
       translation: words.translation
     }]);
-    setWords({lingua:'', word:'', transcription:'', translation:''})
   }
  }
 
