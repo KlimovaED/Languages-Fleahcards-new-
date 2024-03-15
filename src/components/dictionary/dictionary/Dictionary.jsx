@@ -11,7 +11,7 @@ function Dictionary(){
 
 const getDates = async()=>{
 try{
-  await fetch("http://localhost:3000/fail.json")
+  await fetch("http://localhost:3001/words")
   .then(response => response.json())
   .then(data => setDatas(data));
 }catch(error){
@@ -22,6 +22,23 @@ try{
 useEffect(()=>{
 getDates();
 },[]);
+
+const saveData = async()=>{
+await fetch("http://localhost:3001/words",{
+  method:'POST',
+  headers:{
+    'Content-Type':'application/json',
+  },
+  body:JSON.stringify({
+    id:( Math.random().toString(36)),
+    lingua: words.lingua,
+      word: words.word,
+      transcription: words.transcription,
+      translation: words.translation
+  }),
+});
+getDates();
+}
 
 
   const [words,setWords]= useState({ lingua:'',word:'',
@@ -60,13 +77,7 @@ getDates();
    hasError = true;
   }
   if(!hasError){
-    setDatas([...datas,{
-      id:( Math.random().toString(36)),
-      lingua: words.lingua,
-      word: words.word,
-      transcription: words.transcription,
-      translation: words.translation
-    }]);
+    saveData();
   }
  }
 
@@ -74,9 +85,15 @@ getDates();
 const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
+  
  }
- const removeString = (id) =>{
-  setDatas(datas.filter((data)=>data.id !== id));
+ const removeString = async (id) =>{
+  //setDatas(datas.filter((data)=>data.id !== id));
+
+  await fetch("http://localhost:3001/words/" + id,{
+    method:'DELETE',});
+    getDates();
+
  }
 
     return (

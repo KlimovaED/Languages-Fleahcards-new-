@@ -1,35 +1,32 @@
-[{
-    "id":"111",
-    "lingua":"english",
-    "word":"jeans",
-    "transcription":"[ˈdʒiːnz]",
-    "translation":"джинсы"
-},
 {
-    "id":"112",
-    "lingua":"english",
-    "word":"humanist",
-    "transcription":"[ˈhjuːməˌnɪst] ",
-    "translation":"гуманист"
-},
-{
-    "id":"113",
-    "lingua":"english",
-    "word":"ivelaria",
-    "transcription":"[vɪˈleərɪə]",
-    "translation":"навес"
-},
-{
-    "id":"114",
-    "lingua":"english",
-    "word":"kangaroo",
-    "transcription":"[ˌkæŋɡəˈruː]",
-    "translation":"кенгуру"
-},{
-    "id":"115",
-    "lingua":"english",
-    "word":"loch",
-    "transcription":"[ˈlɑːk]",
-    "translation":"озеро"
+  "words": [
+    {
+      "id": "111",
+      "lingua": "english",
+      "word": "jeans",
+      "transcription": "[ˈdʒiːnz]",
+      "translation": "джинсы"
+    },
+    {
+      "id": "112",
+      "lingua": "english",
+      "word": "humanist",
+      "transcription": "[ˈhjuːməˌnɪst] ",
+      "translation": "гуманист"
+    },
+    {
+      "id": "113",
+      "lingua": "english",
+      "word": "ivelaria",
+      "transcription": "[vɪˈleərɪə]",
+      "translation": "навес"
+    },
+    {
+      "id": "114",
+      "lingua": "english",
+      "word": "kangaroo",
+      "transcription": "[ˌkæŋɡəˈruː]",
+      "translation": "кенгуру"
+    }
+  ]
 }
-]
