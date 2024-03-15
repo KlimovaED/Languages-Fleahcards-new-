@@ -45,30 +45,13 @@ getDates();
     transcription:'',
     translation:''})
 
-  function onChangeWord(ev){
-    setWords({ lingua:words.lingua, word:ev.target.value,
-      transcription:words.transcription,
-      translation:words.translation
-    })
-  }
-  function onChangeTranscription(ev){
-    setWords({lingua:words.lingua, word:words.word,
-      transcription:ev.target.value,
-      translation:words.translation
-    })
-  }
-  function onChangeTranslation(ev){
-    setWords({lingua:words.lingua, word:words.word,
-      transcription:words.transcription,
-      translation:ev.target.value
-    })
-  }
-  function onChangeSelect(ev){
-    setWords({lingua:ev.target.value, word:words.word,
-      transcription:words.transcription,
-      translation:words.translation
-    })
-  }
+    const onChangeInputs =(e)=>{
+      const value = e.target.value;
+      setWords({
+        ...words,[e.target.name]:value
+      });
+    }
+
 
  const onSubmitForm = (event) =>{
   event.preventDefault();
@@ -100,28 +83,34 @@ const newStr = datas.map((data) =>
       <section id="dictionary" className={styles.dictionary__container}>
         <h1 className={styles.dictionary__title}>Словарь</h1>
         <div on className={styles.dictionary__content}>
-          <form onSubmit={onSubmitForm} name="formWords" className={styles.dictionary__inputs}>
-            <select className={styles.lingua} onChange={onChangeSelect} value={words.lingua} >
+          <form onSubmit={onSubmitForm} name="formWords" className={styles.dictionary__inputs} autocomplete="off">
+            <select className={styles.lingua} name="lingua" onChange={onChangeInputs} value={words.lingua} >
               <option value="" disabled>-- Выберите язык --</option>
-              <option value="English">Английский</option>
-              <option value="Italian">Итальянский</option>
-              <option value="French">Французский</option>
-              <option value="Chinese">Китайский</option>
-              <option value="Turkish">Турецкий</option>
+              <option value="english">Английский</option>
+              <option value="italian">Итальянский</option>
+              <option value="french">Французский</option>
+              <option value="chinese">Китайский</option>
+              <option value="turkish">Турецкий</option>
             </select>
             <input
-            onChange={onChangeWord}
+            name="word"
+            value={words.word}
+            onChange={onChangeInputs}
               className={styles.word}
               placeholder="Введите слово"
             />
             <input
-            onChange={onChangeTranscription}
+            value={words.transcription}
+            name="transcription"
+            onChange={onChangeInputs}
               className={styles.transcription}
               type="text"
               placeholder="Введите транскрипцию"
             />
             <input
-             onChange={onChangeTranslation}
+            value={words.translation}
+            onChange={onChangeInputs}
+            name="translation"
               className={styles.translation}
               type="text"
               placeholder="Введите перевод"
