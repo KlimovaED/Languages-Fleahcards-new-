@@ -35,14 +35,33 @@ const nextCard =()=>{
 }
 
 const dontKnowCard=()=>{
-  setDictionary([...dictionarys,{
+ /* setDictionary([...dictionarys,{
     id:( Math.random().toString(36)),
     lingua: currentCard.lingua,
     word: currentCard.word,
     transcription: currentCard.transcription,
     translation: currentCard.translation
   }]);
-  console.log(dictionarys);
+  console.log(dictionarys);*/
+try{
+  fetch("http://localhost:3001/words",{
+  method:'POST',
+  headers:{
+    'Content-Type':'application/json',
+  },
+  body:JSON.stringify({
+    id:( Math.random().toString(36)),
+    lingua: currentCard.lingua,
+      word: currentCard.word,
+      transcription: currentCard.transcription,
+      translation: currentCard.translation
+  }),
+})
+alert("Вы добавили новое слово в свой словарь ! ");
+}catch(error){
+  console.log(error.message);
+  alert("Произошла ошибка при добавлении...")
+}
 }
 
       return (

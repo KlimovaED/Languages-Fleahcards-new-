@@ -8,6 +8,9 @@ import String from "../string/String";
 
 function Dictionary(){
   const [datas, setDatas] = useState([]);
+  const [words,setWords]= useState({ lingua:'',word:'',
+  transcription:'',
+  translation:''});
 
 const getDates = async()=>{
 try{
@@ -37,13 +40,9 @@ await fetch("http://localhost:3001/words",{
       translation: words.translation
   }),
 });
-getDates();
+//getDates();
 }
 
-
-  const [words,setWords]= useState({ lingua:'',word:'',
-    transcription:'',
-    translation:''})
 
     const onChangeInputs =(e)=>{
       const value = e.target.value;
@@ -64,12 +63,13 @@ getDates();
   }
  }
 
- const handleChangeString =(nextString) =>{
-const newStr = datas.map((data) => 
+ const handleChangeString = async (nextString) =>{
+  const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
-  
  }
+
+
  const removeString = async (id) =>{
   //setDatas(datas.filter((data)=>data.id !== id));
 

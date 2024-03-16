@@ -11,8 +11,15 @@ function String({data,removeString, onChange}){
     setOrigonalData(data);
 setEdit(true);
     }
- const saveEdit =()=>{
+ const saveEdit = async()=>{
     setEdit(false);
+    await fetch("http://localhost:3001/words/"+data.id,{
+    method:'PUT',
+    headers:{
+      'Content-Type':'application/json',
+    },
+    body:JSON.stringify(data),
+  });  
  }
  const handleCancel =(e)=>{
     onChange(originalData);
