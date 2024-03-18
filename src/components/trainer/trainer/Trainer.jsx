@@ -7,8 +7,8 @@ class Trainer extends React.Component {
     return (
     <main id='trainer' className="trainer__container">
     <div className='selection-info'>
-    <select className='lingua'>
-      <option disabled selected>-- Выберите язык --</option>
+    <select className='lingua' defaultValue="">
+      <option value="" disabled >-- Выберите язык --</option>
       <option value="english">Английский</option>
       <option value="italian">Итальянский</option>
       <option value="french">Французский</option>
