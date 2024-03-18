@@ -1,30 +1,32 @@
 import styles from './string.module.scss';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
-function String({data,removeString, onChange}){
+const String = memo(function String({data,removeString, onChange}){
     
 
     const [edit,setEdit] =useState(false);
     const [originalData, setOrigonalData] = useState(data);
 
- const handleEdit = ()=>{
+    const handleEdit = ()=>{
     setOrigonalData(data);
-setEdit(true);
+    setEdit(true);
     }
- const saveEdit = async()=>{
+
+    const saveEdit = async()=>{
     setEdit(false);
     await fetch("http://localhost:3001/words/"+data.id,{
     method:'PUT',
     headers:{
-      'Content-Type':'application/json',
+        'Content-Type':'application/json',
     },
     body:JSON.stringify(data),
-  });  
- }
- const handleCancel =(e)=>{
+    });  
+    }
+
+    const handleCancel =(e)=>{
     onChange(originalData);
     setEdit(false);
- }
+    }
 
 
 
@@ -64,6 +66,6 @@ setEdit(true);
 
 
 
-}
+})
 
 export default String;

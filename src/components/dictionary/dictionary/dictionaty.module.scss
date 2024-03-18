@@ -36,8 +36,15 @@
             .lingua,.word,.transcription,.translation{
 @include Box();
             }
+            .error{
+                border: 2px solid red;
+                box-shadow:  0 0 0.5em red;
+            }
             .btn__save{
                 @include Btn-colored();
+            }
+            .btn__save:disabled{
+                background-color: gray;
             }
             .btn__reset{
              @include Btn-transparent()

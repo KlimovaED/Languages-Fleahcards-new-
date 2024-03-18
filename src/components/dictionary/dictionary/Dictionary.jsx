@@ -1,16 +1,17 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
-import { useState} from "react";
-import { useEffect } from "react";
+import { useState,useEffect} from "react";
 import String from "../string/String";
 
 
 
 function Dictionary(){
+  const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
+
   const [datas, setDatas] = useState([]);
-  const [words,setWords]= useState({ lingua:'',word:'',
-  transcription:'',
-  translation:''});
+  const [words,setWords]= useState({ lingua:'',word:'',transcription:'',translation:''});
+  
+
 
 const getDates = async()=>{
 try{
@@ -43,8 +44,7 @@ await fetch("http://localhost:3001/words",{
 //getDates();
 }
 
-
-    const onChangeInputs =(e)=>{
+const onChangeInputs =(e)=>{
       const value = e.target.value;
       setWords({
         ...words,[e.target.name]:value
@@ -52,39 +52,48 @@ await fetch("http://localhost:3001/words",{
     }
 
 
- const onSubmitForm = (event) =>{
+  let hasError; 
+  const onSubmitForm = (event) =>{
   event.preventDefault();
-  let hasError = false; 
-  if(words.word===""||words.lingua ===""||words.transcription ===""||words.translation ==="" ){
-   hasError = true;
-  }
-  if(!hasError){
+  hasError = false;
+  validateForm();
+  if(hasError===false){
     saveData();
+  }
+  }
+
+ const validateForm =()=>{
+  if(words.word===""||words.lingua ===""||words.transcription ===""||words.translation ==="" ){
+    hasError = true;
+    }
+  if(hasError === true){
+    setFormError({ input1:words.lingua ==="",input2: words.word === "", input3: words.transcription === "", input4: words.translation === "" });
   }
  }
 
- const handleChangeString = async (nextString) =>{
+
+
+  const handleChangeString = async (nextString) =>{
   const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
- }
+  }
 
 
- const removeString = async (id) =>{
+  const removeString = async (id) =>{
   //setDatas(datas.filter((data)=>data.id !== id));
-
   await fetch("http://localhost:3001/words/" + id,{
     method:'DELETE',});
     getDates();
 
- }
+  }
 
     return (
       <section id="dictionary" className={styles.dictionary__container}>
         <h1 className={styles.dictionary__title}>Словарь</h1>
         <div  className={styles.dictionary__content}>
-          <form onSubmit={onSubmitForm} name="formWords" className={styles.dictionary__inputs} autoComplete="off">
-            <select className={styles.lingua} name="lingua" onChange={onChangeInputs} value={words.lingua} >
+          <form onSubmit={onSubmitForm}  name="formWords" className={styles.dictionary__inputs} autoComplete="off">
+            <select className={`${styles.lingua} ${formError.input1? styles.error : null}`} name="lingua" onChange={onChangeInputs} value={words.lingua} >
               <option value="" disabled>-- Выберите язык --</option>
               <option value="english">Английский</option>
               <option value="italian">Итальянский</option>
@@ -96,7 +105,7 @@ await fetch("http://localhost:3001/words",{
             name="word"
             value={words.word}
             onChange={onChangeInputs}
-              className={styles.word}
+              className={`${styles.word} ${formError.input2? styles.error : null}`}
               placeholder="Введите слово"
               type="text"
             />
@@ -104,7 +113,7 @@ await fetch("http://localhost:3001/words",{
             value={words.transcription}
             name="transcription"
             onChange={onChangeInputs}
-              className={styles.transcription}
+              className={`${styles.transcription} ${formError.input3? styles.error : null}`}
               type="text"
               placeholder="Введите транскрипцию"
             />
@@ -112,11 +121,11 @@ await fetch("http://localhost:3001/words",{
             value={words.translation}
             onChange={onChangeInputs}
             name="translation"
-              className={styles.translation}
+              className={`${styles.translation} ${formError.input4? styles.error : null}`}
               type="text"
               placeholder="Введите перевод"
             />
-            <button className={styles.btn__save} type="submit">
+            <button className={styles.btn__save}  type="submit">
               Сохранить
             </button>
             <button className={styles.btn__reset} type="reset">
