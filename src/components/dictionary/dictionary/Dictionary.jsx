@@ -82,7 +82,7 @@ await fetch("http://localhost:3001/words",{
     return (
       <section id="dictionary" className={styles.dictionary__container}>
         <h1 className={styles.dictionary__title}>Словарь</h1>
-        <div on className={styles.dictionary__content}>
+        <div  className={styles.dictionary__content}>
           <form onSubmit={onSubmitForm} name="formWords" className={styles.dictionary__inputs} autoComplete="off">
             <select className={styles.lingua} name="lingua" onChange={onChangeInputs} value={words.lingua} >
               <option value="" disabled>-- Выберите язык --</option>
