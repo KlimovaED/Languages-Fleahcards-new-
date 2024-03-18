@@ -98,6 +98,7 @@ await fetch("http://localhost:3001/words",{
             onChange={onChangeInputs}
               className={styles.word}
               placeholder="Введите слово"
+              type="text"
             />
             <input
             value={words.transcription}

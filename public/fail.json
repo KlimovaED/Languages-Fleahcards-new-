@@ -29,18 +29,18 @@
       "translation": "кенгуру"
     },
     {
-      "id": "0.fl91g02b8av",
-      "lingua": "english",
-      "word": "dc",
-      "transcription": "dcj",
-      "translation": "dx"
-    },
-    {
       "id": "0.cuzu8gtiqfw",
       "lingua": "english",
       "word": "fly",
       "transcription": "[flai]",
       "translation": "летать"
+    },
+    {
+      "id": "0.6un6q3p38dl",
+      "lingua": "english",
+      "word": "р",
+      "transcription": "р",
+      "translation": "о"
     }
   ]
 }
