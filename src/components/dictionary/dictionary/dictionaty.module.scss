@@ -50,6 +50,17 @@
              @include Btn-transparent()
             }
         }
+        .error__message {
+            width: 100%;
+            text-align: center;
+            margin-top: 15%;
+        }
+        .loading__img{
+            width: 10%;
+            height: auto;
+            margin-top: 15%;
+            margin-left: 45%;
+        }
         .result{
             margin-top: 2%;
             width: 100%;

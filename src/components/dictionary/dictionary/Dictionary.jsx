@@ -7,19 +7,23 @@ import String from "../string/String";
 
 function Dictionary(){
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
-
   const [datas, setDatas] = useState([]);
   const [words,setWords]= useState({ lingua:'',word:'',transcription:'',translation:''});
+  const [loading,setLoading]= useState(true);
+  const [error,setError] = useState(null);
   
 
 
-const getDates = async()=>{
+const getDates = ()=>{
 try{
-  await fetch("http://localhost:3001/words")
+   fetch("http://localhost:3001/words")
   .then(response => response.json())
-  .then(data => setDatas(data));
+  .then(data =>{ setDatas(data)
+                  setLoading(false)});
 }catch(error){
   console.log(error);
+  setError(error);
+  setLoading(false)
 }
 }
 
@@ -27,8 +31,10 @@ useEffect(()=>{
 getDates();
 },[]);
 
-const saveData = async()=>{
-await fetch("http://localhost:3001/words",{
+const saveData = ()=>{
+setLoading(true);
+try{
+fetch("http://localhost:3001/words",{
   method:'POST',
   headers:{
     'Content-Type':'application/json',
@@ -41,6 +47,9 @@ await fetch("http://localhost:3001/words",{
       translation: words.translation
   }),
 });
+}catch(error){
+  setError(error);
+}
 //getDates();
 }
 
@@ -71,14 +80,11 @@ const onChangeInputs =(e)=>{
   }
  }
 
-
-
   const handleChangeString = async (nextString) =>{
   const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
   }
-
 
   const removeString = async (id) =>{
   //setDatas(datas.filter((data)=>data.id !== id));
@@ -132,7 +138,10 @@ const onChangeInputs =(e)=>{
               Удалить
             </button>
           </form>
-          <div id="dictionary__result" className={styles.result}>
+          {loading ? 
+          <img src="https://i.gifer.com/ZhKG.gif" className={styles.loading__img}  alt="img"/>
+            : error ? <p className={styles.error__message}>Ошибка загрузки данных ...</p>: 
+            <div id="dictionary__result" className={styles.result}>
             {
             datas.map((data)=>{
                 return(
@@ -145,6 +154,7 @@ const onChangeInputs =(e)=>{
               })
             }
           </div>
+}
         </div>
       </section>
     );
