@@ -5,9 +5,11 @@ import Dictionary from './components/dictionary/dictionary/Dictionary';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import MainPage from './components/main page/MainPage';
 import ErrorPage from './components/error page/ErrorPage';
+import { ContextProvider } from './components/context/Сontext';
 
 function App() {
   return (
+    <ContextProvider>
     <Router>
     <div className="App">
       <Header />
@@ -19,6 +21,7 @@ function App() {
       </Routes>
     </div>
     </Router>
+    </ContextProvider>
   );
 }
 

@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
-import { useState,useEffect} from "react";
+import { useState,useEffect,useContext} from "react";
 import String from "../string/String";
+import { MyContext } from '../../context/Сontext';
+
+
 
 
 
@@ -9,27 +12,17 @@ function Dictionary(){
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
   const [datas, setDatas] = useState([]);
   const [words,setWords]= useState({ lingua:'',word:'',transcription:'',translation:''});
-  const [loading,setLoading]= useState(true);
+  const [loading,setLoading]= useState(false);
   const [error,setError] = useState(null);
+  const {dictionarys} = useContext(MyContext);
   
 
+console.log(datas);
 
-const getDates = ()=>{
-try{
-   fetch("http://localhost:3001/words")
-  .then(response => response.json())
-  .then(data =>{ setDatas(data)
-                  setLoading(false)});
-}catch(error){
-  console.log(error);
-  setError(error);
-  setLoading(false)
-}
-}
 
 useEffect(()=>{
-getDates();
-},[]);
+setDatas(dictionarys)
+},[dictionarys]);
 
 const saveData = ()=>{
 setLoading(true);
@@ -90,7 +83,7 @@ const onChangeInputs =(e)=>{
   //setDatas(datas.filter((data)=>data.id !== id));
   await fetch("http://localhost:3001/words/" + id,{
     method:'DELETE',});
-    getDates();
+ 
 
   }
 

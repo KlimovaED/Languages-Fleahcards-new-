@@ -16,7 +16,18 @@
     border: 0.5px solid rgba(79, 36, 164, 0.309);
     border-radius: 10px;
     box-shadow: rgba(53, 20, 136, 0.2) 0px 12px 28px 0px, rgba(64, 11, 117, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
- 
+ .loading{
+    width: 10%;
+    height: auto;
+    margin-left: 45%;
+    margin-top: 20%;
+ }
+ .error{
+    color: red;
+    font-family: $FontFamily;
+    font-size: 1.2rem;
+    margin: 20% auto 0;
+ }
 }
 .buttons{
     margin-top: 2%;

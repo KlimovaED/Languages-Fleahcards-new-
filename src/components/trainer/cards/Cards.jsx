@@ -1,28 +1,22 @@
-import React, { useEffect, useState} from 'react';
+import React, { useContext, useState} from 'react';
 import './cards.scss';
 import Card from '../card/Card';
-import wordJSON from '../words.json';
+import { MyContext } from '../../context/Сontext';
 
 
 
 function FlashCard () {
-const [dictionarys,setDictionary] =useState([]);
-const [cards,setCards] = useState(wordJSON);
-  const[currentCardId,setCurrentCardId] = useState(0);
-  const[currentCard, setCurrentCard] = useState({});
   const [showTranslation,setShowTranslation] = useState(false);
   const [count,setCount] = useState(0);
 
-
+  const {cards,currentCardId,setCurrentCardId,dictionarys,setDictionary,loading,error} = useContext(MyContext);
+ 
+  
   const countWords = ()=>{
 setCount((count)=> count+1);
   }
   
   
-
-  useEffect(()=>{
-    setCurrentCard(cards[currentCardId]);
-  },[cards,currentCardId])
 
 const knowCard=()=>{
  setCurrentCardId((currentCardId)=>(currentCardId< cards.length-1 ? currentCardId +1 : 0));
@@ -35,45 +29,29 @@ const nextCard =()=>{
 }
 
 const dontKnowCard=()=>{
- /* setDictionary([...dictionarys,{
+  setDictionary([...dictionarys,{
     id:( Math.random().toString(36)),
-    lingua: currentCard.lingua,
-    word: currentCard.word,
-    transcription: currentCard.transcription,
-    translation: currentCard.translation
+    lingua: Object.keys(cards[currentCardId])[1],
+    word: cards[currentCardId].english,
+    transcription: cards[currentCardId].transcription,
+    translation: cards[currentCardId].russian
   }]);
-  console.log(dictionarys);*/
-try{
-  fetch("http://localhost:3001/words",{
-  method:'POST',
-  headers:{
-    'Content-Type':'application/json',
-  },
-  body:JSON.stringify({
-    id:( Math.random().toString(36)),
-    lingua: currentCard.lingua,
-      word: currentCard.word,
-      transcription: currentCard.transcription,
-      translation: currentCard.translation
-  }),
-})
-alert("Вы добавили новое слово в свой словарь ! ");
-}catch(error){
-  console.log(error.message);
-  alert("Произошла ошибка при добавлении...")
+  alert("Вы добавили новое слово в свой словарь ! ");
 }
-}
+
 
       return (
         <React.Fragment>
           <span className="counter-word">{currentCardId+1} / {cards.length}</span>
     <div className='game__box'>
-      <Card 
-      showTranslation={showTranslation}
-      setShowTranslation={setShowTranslation}
-      data={currentCard}
-      countWords={countWords}
-      />
+{loading ? <img src="https://i.gifer.com/ZhKG.gif" className="loading"  alt="img"/> : error ? <p className='error'>{error}</p> :
+<Card 
+    showTranslation={showTranslation}
+    setShowTranslation={setShowTranslation}
+    data={cards[currentCardId]}
+    countWords={countWords}
+    />
+ }
     </div>
     <div className='buttons'>
         <button type='button' onClick={dontKnowCard} className='btn'>Не знаю</button>
