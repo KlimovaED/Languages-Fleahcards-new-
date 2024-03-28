@@ -30,11 +30,11 @@ const nextCard =()=>{
 
 const dontKnowCard=()=>{
   setDictionary([...dictionarys,{
-    id:( Math.random().toString(36)),
+    id:cards[currentCardId].id,
     lingua: Object.keys(cards[currentCardId])[1],
-    word: cards[currentCardId].english,
+    english: cards[currentCardId].english,
     transcription: cards[currentCardId].transcription,
-    translation: cards[currentCardId].russian
+    russian:cards[currentCardId].russian
   }]);
   alert("Вы добавили новое слово в свой словарь ! ");
 }

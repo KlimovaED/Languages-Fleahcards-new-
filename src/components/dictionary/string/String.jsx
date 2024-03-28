@@ -14,14 +14,12 @@ const String = memo(function String({data,removeString, onChange}){
 
     const saveEdit = async()=>{
     setEdit(false);
-    await fetch("http://localhost:3001/words/"+data.id,{
-    method:'PUT',
-    headers:{
-        'Content-Type':'application/json',
-    },
-    body:JSON.stringify(data),
-    });  
-    }
+    console.log(data);
+    let id = data.id;
+    await fetch("/api/words/"+id+"/update",{
+    method:'POST', 
+    });
+};
 
     const handleCancel =(e)=>{
     onChange(originalData);
@@ -37,14 +35,14 @@ const String = memo(function String({data,removeString, onChange}){
         {edit ? 
             <React.Fragment>
         <p className={styles.word}>{data.lingua}</p>
-        <input  type="text"className={styles.word__edit} value={data.word} onChange={(e)=> { onChange({
-            ...data, word: e.target.value,
+        <input  type="text"className={styles.word__edit} value={data.english} onChange={(e)=> { onChange({
+            ...data, english: e.target.value,
         })}}  />
         <input type="text" className={styles.word__edit} value={data.transcription} onChange={(e)=> { onChange({
             ...data, transcription: e.target.value,
         })}} />
-        <input  type="text" className={styles.word__edit} value={data.translation}  onChange={(e)=> { onChange({
-            ...data,translation: e.target.value,
+        <input  type="text" className={styles.word__edit} value={data.russian}  onChange={(e)=> { onChange({
+            ...data,russian: e.target.value,
         })}}/>
         <button type='button' className={styles.btn__edit} onClick={saveEdit} >Сохранить</button>
         <button type='button' className={styles.btn__delete} onClick={handleCancel} >Отменить</button>
@@ -52,9 +50,9 @@ const String = memo(function String({data,removeString, onChange}){
         : 
     (<React.Fragment>
     <p className={styles.word}>{data.lingua}</p>
-        <p className={styles.word}>{data.word}</p>
+        <p className={styles.word}>{data.english}</p>
         <p className={styles.word}>{data.transcription}</p>
-        <p className={styles.word}>{data.translation}</p>
+        <p className={styles.word}>{data.russian}</p>
         <button type='button' className={styles.btn__edit} onClick={handleEdit} > { edit ? "Сохранить" : "Редактировать"}</button>
         <button type='button' className={styles.btn__delete} onClick={() => removeString(data.id)}>Удалить</button>
         </React.Fragment>

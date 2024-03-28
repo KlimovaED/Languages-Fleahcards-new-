@@ -11,37 +11,35 @@ import { MyContext } from '../../context/Сontext';
 function Dictionary(){
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
   const [datas, setDatas] = useState([]);
-  const [words,setWords]= useState({ lingua:'',word:'',transcription:'',translation:''});
+  const [words,setWords]= useState({ lingua:'',transcription:'',english:'',russian:''});
   const [loading,setLoading]= useState(false);
   const [error,setError] = useState(null);
   const {dictionarys} = useContext(MyContext);
   
-
-console.log(datas);
 
 
 useEffect(()=>{
 setDatas(dictionarys)
 },[dictionarys]);
 
-const saveData = ()=>{
-setLoading(true);
+
+const saveData = async()=>{
 try{
-fetch("http://localhost:3001/words",{
+await fetch("/api/words/add",{
   method:'POST',
   headers:{
     'Content-Type':'application/json',
   },
   body:JSON.stringify({
-    id:( Math.random().toString(36)),
-    lingua: words.lingua,
-      word: words.word,
+      english: words.word,
       transcription: words.transcription,
-      translation: words.translation
+      russian: words.translation
   }),
 });
+alert("Вы добавили новое слово для изучения !")
 }catch(error){
   setError(error);
+  alert("Произошла ошибка" + error);
 }
 //getDates();
 }
@@ -73,16 +71,17 @@ const onChangeInputs =(e)=>{
   }
  }
 
-  const handleChangeString = async (nextString) =>{
+  const handleChangeString =  (nextString) =>{
   const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
+  console.log(datas);
   }
 
   const removeString = async (id) =>{
-  //setDatas(datas.filter((data)=>data.id !== id));
-  await fetch("http://localhost:3001/words/" + id,{
-    method:'DELETE',});
+  setDatas(datas.filter((data)=>data.id !== id));
+  await fetch("/api/words/" +id +"/delete",{
+    method:'POST',});
  
 
   }
@@ -101,8 +100,8 @@ const onChangeInputs =(e)=>{
               <option value="turkish">Турецкий</option>
             </select>
             <input
-            name="word"
-            value={words.word}
+            name="english"
+            value={words.english}
             onChange={onChangeInputs}
               className={`${styles.word} ${formError.input2? styles.error : null}`}
               placeholder="Введите слово"
@@ -117,9 +116,9 @@ const onChangeInputs =(e)=>{
               placeholder="Введите транскрипцию"
             />
             <input
-            value={words.translation}
+            value={words.russian}
             onChange={onChangeInputs}
-            name="translation"
+            name="russian"
               className={`${styles.translation} ${formError.input4? styles.error : null}`}
               type="text"
               placeholder="Введите перевод"
