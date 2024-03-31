@@ -31,9 +31,9 @@ await fetch("/api/words/add",{
     'Content-Type':'application/json',
   },
   body:JSON.stringify({
-      english: words.word,
+      english: words.english,
       transcription: words.transcription,
-      russian: words.translation
+      russian: words.russian
   }),
 });
 alert("Вы добавили новое слово для изучения !")
@@ -75,7 +75,6 @@ const onChangeInputs =(e)=>{
   const newStr = datas.map((data) => 
     data.id === nextString.id ? nextString : data);
   setDatas(newStr);
-  console.log(datas);
   }
 
   const removeString = async (id) =>{

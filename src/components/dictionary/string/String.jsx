@@ -12,13 +12,19 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = async()=>{
-    setEdit(false);
-    console.log(data);
-    let id = data.id;
+    const saveEdit = async(id)=>{
     await fetch("/api/words/"+id+"/update",{
     method:'POST', 
+    headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({
+          english: data.english,
+          transcription: data.transcription,
+          russian: data.russian
+      }),
     });
+    setEdit(false);
 };
 
     const handleCancel =(e)=>{
