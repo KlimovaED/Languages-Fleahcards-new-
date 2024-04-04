@@ -1,28 +1,50 @@
-import {  action, makeAutoObservable, observable, runInAction } from "mobx";
+import {  action, makeAutoObservable, observable, } from "mobx";
 
 
 
 class WordStore {
     @observable cards = []
-     currendIndexId = 0
-     currendCard = this.cards[this.currendIndexId]
-    loading = false
+    @observable  currentIndexId = 0
+    @observable dictionary = {lingua :"", id:"",english:"",transcription:"",russian:""}
+    loading = true
+    error  = null
+    showTranslation = false
 
     constructor(){
-       makeAutoObservable(this);
+        makeAutoObservable(this);
     }
     
-  @action.bound getData =  () =>{
-    this.loading = true;
-    fetch("/api/words")
+    getData =  action(() =>{
+  return fetch('/api/words')
         .then(response =>{
            if(response.ok) {
-     response.json()
+    return response.json()
     }else{
-        throw new Error("Упс");
+        throw new Error("Упс")
     }})
-    .then(data => console.log(data))  
-        .catch(error=>console.error(error))
-    }
+    .then(data => {
+        this.cards = data;
+        this.loading= false;})
+       
+        .catch(error=>{
+            this.error = error ;
+            this.loading= false;
+        })
+    });
+
+    nextCard = action(()=>{
+        this.currentIndexId =  this.currentIndexId < this.cards.length-1 ? this.currentIndexId+1 : 0;
+        this.showTranslation= false;
+    });
+
+    knowCard = action(()=>{
+        this.currentIndexId =  this.currentIndexId < this.cards.length-1 ? this.currentIndexId+1 : 0;
+        this.showTranslation= false;
+    });
+
+    dontKnow = action(()=>{
+this.showTranslation= true;
+    });
+
 }
 export default  WordStore;

@@ -1,44 +1,44 @@
 import React, {  useState} from 'react';
 import './cards.scss';
-//import Card from '../card/Card';
+import Card from '../card/Card';
 import { inject,observer } from 'mobx-react';
 
 
 
 const FlashCard = inject(['WordStore'])(observer(({WordStore})=>{
-const [dictionarys,setDictionary] =useState([]);
-  const [showTranslation,setShowTranslation] = useState(false);
   const [count,setCount] = useState(0);
-
+  WordStore.getData();
+ const cards = WordStore.cards;
+ let index = WordStore.currentIndexId;
+const loading = WordStore.loading;
 
   const countWords = ()=>{
 setCount((count)=> count+1);
   }
  
+  const setShowTranslation =()=>{
+WordStore.showTranslation = true;
+  }
 
-
-const knowCard=()=>{
-
-};
-
-const nextCard =()=>{
-
-}
-
-const dontKnowCard=()=>{
-
-}
 
       return (
         <React.Fragment>
-          <span className="counter-word">{+1} / {}</span>
+          <span className="counter-word">{index+1} / {cards.length}</span>
     <div className='game__box'>
-      
+    {loading ? <img src="https://i.gifer.com/ZhKG.gif" className="loading"  alt="img"/> : WordStore.error ? <p className='error'>{WordStore.error}</p> :
+<Card 
+    showTranslation={WordStore.showTranslation}
+    setShowTranslation={setShowTranslation}
+    data={cards[index]}
+    countWords={countWords}
+    />
+ }
+
     </div>
     <div className='buttons'>
-        <button type='button' onClick={dontKnowCard} className='btn'>Не знаю</button>
-        <button type='button' onClick={nextCard} className='btn'>Пропустить</button>
-        <button type='button' onClick={knowCard}  className='btn'>Знаю</button>
+        <button type='button' onClick={WordStore.dontKnow} className='btn'>Не знаю</button>
+        <button type='button' onClick={WordStore.nextCard} className='btn'>Пропустить</button>
+        <button type='button' onClick={WordStore.knowCard}  className='btn'>Знаю</button>
     </div>
     <p className='learned-words'> За эту тренировку вы выучили : {count} {count===1?"слово":""} {( count === 0||count > 4) ?"слов":""} {( count > 1 && count < 5 ) ?"слова":""} </p>
     </React.Fragment>
@@ -47,9 +47,4 @@ const dontKnowCard=()=>{
     
     export default  FlashCard;
 
-    /*<Card 
-      showTranslation={showTranslation}
-      setShowTranslation={setShowTranslation}
-      data={currentCard}
-      countWords={countWords}
-      />*/
+    /**/
