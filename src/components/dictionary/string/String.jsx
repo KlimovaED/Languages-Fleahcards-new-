@@ -12,8 +12,9 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = async(id)=>{
-    await fetch("/api/words/"+id+"/update",{
+    const saveEdit = async()=>{
+        try{
+    const response = await fetch("/api/words/"+data.id+"/update",{
     method:'POST', 
     headers:{
         'Content-Type':'application/json',
@@ -24,7 +25,15 @@ const String = memo(function String({data,removeString, onChange}){
           russian: data.russian
       }),
     });
-    setEdit(false);
+    if(response.ok){
+        const updatedData = await response.json();
+        onChange(updatedData);
+        setEdit(false);
+    }else{
+        throw new Error ("Не удалось обновить слово")
+    }}catch(error){
+        console.error(error)
+    }
 };
 
     const handleCancel =(e)=>{
