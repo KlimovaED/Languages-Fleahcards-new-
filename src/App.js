@@ -6,6 +6,9 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import MainPage from './components/main page/MainPage';
 import ErrorPage from './components/error page/ErrorPage';
 
+
+
+
 function App() {
   return (
     <Router>
