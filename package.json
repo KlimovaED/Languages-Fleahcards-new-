@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "concurrently": "^8.2.2",
     "json-server": "^1.0.0-alpha.23",
+    "mobx": "^6.12.3",
+    "mobx-react": "^9.1.1",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.8",
     "react-dom": "^18.2.0",
@@ -18,12 +20,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev":"concurrently \"npm run server\" \"npm start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -w public/fail.json -p 3001"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
