@@ -65,8 +65,8 @@ const onChangeInputs =(e)=>{
   }
 
 
-  const removeString = async (id) =>{
-  dictionarys = await dictionarys.filter((data)=>data.id !== id);
+  const removeString = async (id,index) =>{
+  WordStore.removeString(index);
   await fetch("/api/words/" + id + "/delete",{
     method:'POST',});
     console.log(dictionarys);

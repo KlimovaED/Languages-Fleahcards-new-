@@ -50,6 +50,8 @@ class WordStore {
     @action addString = (string) => {
         return this.dictionarys.push(string);
     }
-  
+  @action removeString = (index)=>{
+    return this.dictionarys.splice(index, 1)
+  }
 }
 export default  WordStore;
