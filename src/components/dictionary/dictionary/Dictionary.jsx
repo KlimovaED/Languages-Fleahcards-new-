@@ -2,53 +2,38 @@ import React from "react";
 import styles from "./dictionaty.module.scss";
 import { useState,useEffect} from "react";
 import String from "../string/String";
+import { inject, observer } from "mobx-react";
 
 
 
-function Dictionary(){
+const Dictionary= inject(['WordStore'])(observer(({WordStore})=>{
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
+let dictionarys = WordStore.dictionarys;
+let  string = {};
 
-  const [datas, setDatas] = useState([]);
-  const [words,setWords]= useState({ lingua:'',word:'',transcription:'',translation:''});
-  
-
-
-const getDates = async()=>{
-try{
-  await fetch("http://localhost:3001/words")
-  .then(response => response.json())
-  .then(data => setDatas(data));
-}catch(error){
-  console.log(error);
-}
-}
-
-useEffect(()=>{
-getDates();
-},[]);
+ 
 
 const saveData = async()=>{
-await fetch("http://localhost:3001/words",{
+await fetch("api/words/add",{
   method:'POST',
   headers:{
     'Content-Type':'application/json',
   },
   body:JSON.stringify({
-    id:( Math.random().toString(36)),
-    lingua: words.lingua,
-      word: words.word,
-      transcription: words.transcription,
-      translation: words.translation
+      english: string.english,
+      transcription: string.transcription,
+      russian: string.russian
   }),
 });
 //getDates();
+WordStore.addString(string);
+console.log(dictionarys);
 }
 
 const onChangeInputs =(e)=>{
       const value = e.target.value;
-      setWords({
-        ...words,[e.target.name]:value
-      });
+      string[e.target.name]=value;
+      string.id = Math.floor(Math.random() * 1000);
     }
 
 
@@ -63,29 +48,28 @@ const onChangeInputs =(e)=>{
   }
 
  const validateForm =()=>{
-  if(words.word===""||words.lingua ===""||words.transcription ===""||words.translation ==="" ){
+  if(string.english===""||string.lingua ===""||string.transcription ===""||string.russian ==="" ){
     hasError = true;
     }
   if(hasError === true){
-    setFormError({ input1:words.lingua ==="",input2: words.word === "", input3: words.transcription === "", input4: words.translation === "" });
+    setFormError({ input1:string.lingua ==="",input2: string.english === "", input3: string.transcription === "", input4: string.russian=== "" });
   }
  }
 
 
 
   const handleChangeString = async (nextString) =>{
-  const newStr = datas.map((data) => 
-    data.id === nextString.id ? nextString : data);
-  setDatas(newStr);
+  dictionarys.map((dictionarys) => 
+    dictionarys.id === nextString.id ? nextString : dictionarys);
+
   }
 
 
   const removeString = async (id) =>{
-  //setDatas(datas.filter((data)=>data.id !== id));
-  await fetch("http://localhost:3001/words/" + id,{
-    method:'DELETE',});
-    getDates();
-
+  dictionarys = await dictionarys.filter((data)=>data.id !== id);
+  await fetch("/api/words/" + id + "/delete",{
+    method:'POST',});
+    console.log(dictionarys);
   }
 
     return (
@@ -93,7 +77,7 @@ const onChangeInputs =(e)=>{
         <h1 className={styles.dictionary__title}>Словарь</h1>
         <div  className={styles.dictionary__content}>
           <form onSubmit={onSubmitForm}  name="formWords" className={styles.dictionary__inputs} autoComplete="off">
-            <select className={`${styles.lingua} ${formError.input1? styles.error : null}`} name="lingua" onChange={onChangeInputs} value={words.lingua} >
+            <select className={`${styles.lingua} ${formError.input1? styles.error : null}`} name="lingua" onChange={onChangeInputs} value={string.lingua} >
               <option value="" disabled>-- Выберите язык --</option>
               <option value="english">Английский</option>
               <option value="italian">Итальянский</option>
@@ -102,15 +86,15 @@ const onChangeInputs =(e)=>{
               <option value="turkish">Турецкий</option>
             </select>
             <input
-            name="word"
-            value={words.word}
+            name="english"
+            value={string.english}
             onChange={onChangeInputs}
               className={`${styles.word} ${formError.input2? styles.error : null}`}
               placeholder="Введите слово"
               type="text"
             />
             <input
-            value={words.transcription}
+            value={string.transcription}
             name="transcription"
             onChange={onChangeInputs}
               className={`${styles.transcription} ${formError.input3? styles.error : null}`}
@@ -118,9 +102,9 @@ const onChangeInputs =(e)=>{
               placeholder="Введите транскрипцию"
             />
             <input
-            value={words.translation}
+            value={string.russian}
             onChange={onChangeInputs}
-            name="translation"
+            name="russian"
               className={`${styles.translation} ${formError.input4? styles.error : null}`}
               type="text"
               placeholder="Введите перевод"
@@ -134,11 +118,11 @@ const onChangeInputs =(e)=>{
           </form>
           <div id="dictionary__result" className={styles.result}>
             {
-            datas.map((data)=>{
+            dictionarys.map((dictionary)=>{
                 return(
                   <String
-                  data={data}
-                  key={data.id}
+                  data={dictionary}
+                  key={dictionary.id}
                   onChange={handleChangeString}
                   removeString={removeString}/>
                 )
@@ -148,7 +132,7 @@ const onChangeInputs =(e)=>{
         </div>
       </section>
     );
-  }
+  }));
 
 
 

@@ -11,7 +11,7 @@ const FlashCard = inject(['WordStore'])(observer(({WordStore})=>{
  const cards = WordStore.cards;
  let index = WordStore.currentIndexId;
 const loading = WordStore.loading;
-let dictionarys = WordStore.dictionarys;
+
 
 
   const countWords = ()=>{

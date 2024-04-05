@@ -5,7 +5,7 @@ import {  action, makeAutoObservable, observable, } from "mobx";
 class WordStore {
     @observable cards = []
     @observable  currentIndexId = 0
-    @observable dictionary = []
+    @observable dictionarys = []
     loading = true
     error  = null
     showTranslation = false
@@ -43,9 +43,13 @@ class WordStore {
     });
 
     dontKnow = action(()=>{
-        this.dictionary.push(this.cards[this.currentIndexId]);
-        console.log(this.dictionary);
+        this.dictionarys.push(this.cards[this.currentIndexId]);
+       return alert("Вы добавили новое слово в словарь !");
     });
 
+    @action addString = (string) => {
+        return this.dictionarys.push(string);
+    }
+  
 }
 export default  WordStore;

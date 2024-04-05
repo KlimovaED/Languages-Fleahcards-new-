@@ -37,13 +37,13 @@ const String = memo(function String({data,removeString, onChange}){
         {edit ? 
             <React.Fragment>
         <p className={styles.word}>{data.lingua}</p>
-        <input  type="text"className={styles.word__edit} value={data.word} onChange={(e)=> { onChange({
+        <input  type="text"className={styles.word__edit} value={data.english} onChange={(e)=> { onChange({
             ...data, word: e.target.value,
         })}}  />
         <input type="text" className={styles.word__edit} value={data.transcription} onChange={(e)=> { onChange({
             ...data, transcription: e.target.value,
         })}} />
-        <input  type="text" className={styles.word__edit} value={data.translation}  onChange={(e)=> { onChange({
+        <input  type="text" className={styles.word__edit} value={data.russian}  onChange={(e)=> { onChange({
             ...data,translation: e.target.value,
         })}}/>
         <button type='button' className={styles.btn__edit} onClick={saveEdit} >Сохранить</button>
@@ -51,10 +51,10 @@ const String = memo(function String({data,removeString, onChange}){
         </React.Fragment>
         : 
     (<React.Fragment>
-    <p className={styles.word}>{data.lingua}</p>
-        <p className={styles.word}>{data.word}</p>
+    <p className={styles.word}>{ data.lingua}</p>
+        <p className={styles.word}>{data.english}</p>
         <p className={styles.word}>{data.transcription}</p>
-        <p className={styles.word}>{data.translation}</p>
+        <p className={styles.word}>{data.russian}</p>
         <button type='button' className={styles.btn__edit} onClick={handleEdit} > { edit ? "Сохранить" : "Редактировать"}</button>
         <button type='button' className={styles.btn__delete} onClick={() => removeString(data.id)}>Удалить</button>
         </React.Fragment>
