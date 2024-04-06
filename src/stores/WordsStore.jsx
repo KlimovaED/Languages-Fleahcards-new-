@@ -9,7 +9,7 @@ class WordStore {
     loading = true
     error  = null
     showTranslation = false
-   
+    @observable string = {english:"",russian:"",transcription:""}
 
     constructor(){
         makeAutoObservable(this);
@@ -57,5 +57,6 @@ class WordStore {
     @action updateString=(nextString)=>{
    
   }
+  
 }
 export default  WordStore;

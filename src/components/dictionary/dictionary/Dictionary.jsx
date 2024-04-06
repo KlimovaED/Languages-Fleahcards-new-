@@ -9,7 +9,7 @@ import { inject, observer } from "mobx-react";
 const Dictionary= inject(['WordStore'])(observer(({WordStore})=>{
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
 let dictionarys = WordStore.dictionarys;
-let  string = {};
+let string = WordStore.string;
 
  
 
@@ -65,9 +65,9 @@ console.log(nextString);
 
 
   const removeString = async (id,index) =>{
-  WordStore.removeString(index);
   await fetch("/api/words/" + id + "/delete",{
     method:'POST',});
+    WordStore.removeString(index);
     console.log(dictionarys);
   }
 
