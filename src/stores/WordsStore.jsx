@@ -9,6 +9,7 @@ class WordStore {
     loading = true
     error  = null
     showTranslation = false
+   
 
     constructor(){
         makeAutoObservable(this);
@@ -50,8 +51,11 @@ class WordStore {
     @action addString = (string) => {
         return this.dictionarys.push(string);
     }
-  @action removeString = (index)=>{
+    @action removeString = (index)=>{
     return this.dictionarys.splice(index, 1)
+  }
+    @action updateString=(nextString)=>{
+   
   }
 }
 export default  WordStore;

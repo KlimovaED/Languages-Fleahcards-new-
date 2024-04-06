@@ -12,15 +12,20 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = async()=>{
+    const saveEdit = ()=>{
     setEdit(false);
-    await fetch("http://localhost:3001/words/"+data.id,{
-    method:'PUT',
+return fetch("/api/words/"+data.id+"/update",{
+    method:'POST',
     headers:{
         'Content-Type':'application/json',
     },
-    body:JSON.stringify(data),
-    });  
+    body:JSON.stringify({
+        english: data.english,
+        transcription: data.transcription,
+        russian: data.russian
+    }),
+  });
+  
     }
 
     const handleCancel =(e)=>{
@@ -38,13 +43,13 @@ const String = memo(function String({data,removeString, onChange}){
             <React.Fragment>
         <p className={styles.word}>{data.lingua}</p>
         <input  type="text"className={styles.word__edit} value={data.english} onChange={(e)=> { onChange({
-            ...data, word: e.target.value,
+            ...data, english: e.target.value,
         })}}  />
         <input type="text" className={styles.word__edit} value={data.transcription} onChange={(e)=> { onChange({
             ...data, transcription: e.target.value,
         })}} />
         <input  type="text" className={styles.word__edit} value={data.russian}  onChange={(e)=> { onChange({
-            ...data,translation: e.target.value,
+            ...data,russian: e.target.value,
         })}}/>
         <button type='button' className={styles.btn__edit} onClick={saveEdit} >Сохранить</button>
         <button type='button' className={styles.btn__delete} onClick={handleCancel} >Отменить</button>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./dictionaty.module.scss";
-import { useState,useEffect} from "react";
+import { useState} from "react";
 import String from "../string/String";
 import { inject, observer } from "mobx-react";
 
@@ -25,9 +25,8 @@ await fetch("api/words/add",{
       russian: string.russian
   }),
 });
-//getDates();
 WordStore.addString(string);
-console.log(dictionarys);
+
 }
 
 const onChangeInputs =(e)=>{
@@ -58,10 +57,10 @@ const onChangeInputs =(e)=>{
 
 
 
-  const handleChangeString = async (nextString) =>{
-  dictionarys.map((dictionarys) => 
-    dictionarys.id === nextString.id ? nextString : dictionarys);
-
+  const handleChangeString =  (nextString) =>{
+  dictionarys.map((dictionary) => 
+    dictionary.id === nextString.id ? nextString : dictionary);
+console.log(nextString);
   }
 
 
