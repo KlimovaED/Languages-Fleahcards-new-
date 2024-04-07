@@ -8,8 +8,9 @@ import { inject, observer } from "mobx-react";
 
 const Dictionary= inject(['WordStore'])(observer(({WordStore})=>{
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
+  const [string,setString]= useState({ lingua:'',transcription:'',english:'',russian:''});
 let dictionarys = WordStore.dictionarys;
-let string = WordStore.string;
+
 
  
 
@@ -30,9 +31,10 @@ WordStore.addString(string);
 }
 
 const onChangeInputs =(e)=>{
-      const value = e.target.value;
-      string[e.target.name]=value;
-      string.id = Math.floor(Math.random() * 1000);
+  const value = e.target.value;
+  setString({
+    ...string,[e.target.name]:value
+  })
     }
 
 
@@ -57,10 +59,9 @@ const onChangeInputs =(e)=>{
 
 
 
-  const handleChangeString =  (nextString) =>{
-  dictionarys.map((dictionary) => 
-    dictionary.id === nextString.id ? nextString : dictionary);
-console.log(nextString);
+ const handleChangeString =  (nextString) =>{
+ WordStore.updateString(nextString);
+ console.log(dictionarys);
   }
 
 
@@ -68,7 +69,6 @@ console.log(nextString);
   await fetch("/api/words/" + id + "/delete",{
     method:'POST',});
     WordStore.removeString(index);
-    console.log(dictionarys);
   }
 
     return (

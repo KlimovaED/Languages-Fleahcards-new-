@@ -12,19 +12,29 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = ()=>{
+    const saveEdit = async()=>{
     setEdit(false);
-return fetch("/api/words/"+data.id+"/update",{
-    method:'POST',
-    headers:{
-        'Content-Type':'application/json',
-    },
-    body:JSON.stringify({
-        english: data.english,
-        transcription: data.transcription,
-        russian: data.russian
-    }),
-  });
+   try{
+        const response = await fetch("/api/words/"+data.id+"/update",{
+        method:'POST', 
+        headers:{
+            'Content-Type':'application/json',
+          },
+          body:JSON.stringify({
+              english: data.english,
+              transcription: data.transcription,
+              russian: data.russian
+          }),
+        });
+        if(response.ok){
+            const updatedData = await response.json();
+            onChange(updatedData);
+            setEdit(false);
+        }else{
+            throw new Error ("Не удалось обновить слово")
+        }}catch(error){
+            console.error(error)
+        }
   
     }
 
@@ -41,7 +51,7 @@ return fetch("/api/words/"+data.id+"/update",{
         
         {edit ? 
             <React.Fragment>
-        <p className={styles.word}>{data.lingua}</p>
+        <p className={styles.word}>{data.lingua || Object.keys(data)[1]}</p>
         <input  type="text"className={styles.word__edit} value={data.english} onChange={(e)=> { onChange({
             ...data, english: e.target.value,
         })}}  />
@@ -56,7 +66,7 @@ return fetch("/api/words/"+data.id+"/update",{
         </React.Fragment>
         : 
     (<React.Fragment>
-    <p className={styles.word}>{ data.lingua}</p>
+    <p className={styles.word}>{ data.lingua || Object.keys(data)[1]}</p>
         <p className={styles.word}>{data.english}</p>
         <p className={styles.word}>{data.transcription}</p>
         <p className={styles.word}>{data.russian}</p>

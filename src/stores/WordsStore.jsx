@@ -9,7 +9,7 @@ class WordStore {
     loading = true
     error  = null
     showTranslation = false
-    @observable string = {english:"",russian:"",transcription:""}
+    
 
     constructor(){
         makeAutoObservable(this);
@@ -55,7 +55,9 @@ class WordStore {
     return this.dictionarys.splice(index, 1)
   }
     @action updateString=(nextString)=>{
-   
+        const nexStr= this.dictionarys.map((dictionary) => 
+        dictionary.id === nextString.id ? nextString : dictionary);
+        return this.dictionarys = nexStr;
   }
   
 }
