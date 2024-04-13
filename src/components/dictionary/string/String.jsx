@@ -10,7 +10,7 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = async (id) => {
+    const saveEdit = async () => {
         setEdit(false);
         try {
             const updatedData = {
