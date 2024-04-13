@@ -20,6 +20,8 @@ const String = memo(function String({data,removeString, onChange}){
         'Content-Type':'application/json',
       },
       body:JSON.stringify({
+          tags:"",
+          tags_json:"",
           english: data.english,
           transcription: data.transcription,
           russian: data.russian
@@ -27,7 +29,8 @@ const String = memo(function String({data,removeString, onChange}){
     });
     if(response.ok){
         const updatedData = await response.json();
-        onChange(updatedData);
+        //onChange(updatedData);
+        console.log(updatedData)
         setEdit(false);
     }else{
         throw new Error ("Не удалось обновить слово")
