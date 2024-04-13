@@ -1,4 +1,4 @@
-import React, {  useState} from 'react';
+import React, {  useEffect, useState} from 'react';
 import './cards.scss';
 import Card from '../card/Card';
 import { inject,observer } from 'mobx-react';
@@ -6,11 +6,15 @@ import { inject,observer } from 'mobx-react';
 
 
 const FlashCard = inject(['WordStore'])(observer(({WordStore})=>{
+  useEffect(()=>{
+    WordStore.getData();
+  },[]);
+
   const [count,setCount] = useState(0);
-  WordStore.getData();
  const cards = WordStore.cards;
  let index = WordStore.currentIndexId;
 const loading = WordStore.loading;
+
 
 
 

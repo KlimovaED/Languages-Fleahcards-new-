@@ -2,8 +2,6 @@ import styles from './string.module.scss';
 import React, { memo, useState } from 'react';
 
 const String = memo(function String({data,removeString, onChange}){
-    
-
     const [edit,setEdit] =useState(false);
     const [originalData, setOrigonalData] = useState(data);
 
@@ -12,30 +10,41 @@ const String = memo(function String({data,removeString, onChange}){
     setEdit(true);
     }
 
-    const saveEdit = async()=>{
-    setEdit(false);
-   try{
-        const response = await fetch("/api/words/"+data.id+"/update",{
-        method:'POST', 
-        headers:{
-            'Content-Type':'application/json',
-          },
-          body:JSON.stringify({
-              english: data.english,
-              transcription: data.transcription,
-              russian: data.russian
-          }),
-        });
-        if(response.ok){
-            const updatedData = await response.json();
-            onChange(updatedData);
-            setEdit(false);
-        }else{
-            throw new Error ("Не удалось обновить слово")
-        }}catch(error){
-            console.error(error)
+    const saveEdit = async (id) => {
+        setEdit(false);
+        try {
+            const updatedData = {
+                english: data.english,
+                transcription: data.transcription,
+                russian: data.russian
+            };
+    
+            console.log("Отправка данных на сервер:", updatedData);  // Для отладки
+    
+            const response = await fetch("/api/words/" +data.id+ "/update", {
+                method: 'POST',  
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:  JSON.stringify({
+            english: data.english,
+            russian: data.russian,
+            tags: data.tags,
+            tags_json: data.tags_json,
+            transcription: data.transcription,
+        }),
+            });
+    
+            if (response.ok) {
+                const returnedData = await response.json();
+            //   onChange(updatedData);
+                console.log("Данные успешно обновлены:", returnedData);  // Для отладки
+            } else {
+                throw new Error("Не удалось обновить слово");
+            }
+        } catch (error) {
+            console.error("Ошибка обновления:", error);  // Улучшенное логирование ошибок
         }
-  
     }
 
     const handleCancel =(e)=>{

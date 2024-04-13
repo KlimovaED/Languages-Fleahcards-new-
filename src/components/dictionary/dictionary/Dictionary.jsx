@@ -8,7 +8,7 @@ import { inject, observer } from "mobx-react";
 
 const Dictionary= inject(['WordStore'])(observer(({WordStore})=>{
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
-  const [string,setString]= useState({ lingua:'',transcription:'',english:'',russian:''});
+  const [string,setString]= useState({ lingua:'',transcription:'',english:'',russian:'',id:`${(Math.random() + 1).toString(36).substring(7)}`});
 let dictionarys = WordStore.dictionarys;
 
 
@@ -61,7 +61,6 @@ const onChangeInputs =(e)=>{
 
  const handleChangeString =  (nextString) =>{
  WordStore.updateString(nextString);
- console.log(dictionarys);
   }
 
 
