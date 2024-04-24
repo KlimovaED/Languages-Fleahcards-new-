@@ -1,13 +1,23 @@
 import styles from './string.module.scss';
 import React, { memo, useState } from 'react';
 
-const String = memo(function String({data,removeString, onChange}){
+const String = memo(function String({array,data,removeString, onChange}){
     const [edit,setEdit] =useState(false);
     const [originalData, setOrigonalData] = useState(data);
+
+        let id2 = 0;
+        for(let i = 0; i<array.length; i++){
+            if(array[i].english === data.english && array[i].transcription=== data.transcription && array[i].russian=== data.russian ){
+                console.log("Есть", array[i].id)
+            id2 = array[i].id;
+        }
+    }
 
     const handleEdit = ()=>{
     setOrigonalData(data);
     setEdit(true);
+    data.id= id2;
+    console.log("Новые данные ",data.id)
     }
 
     const saveEdit = async () => {
@@ -21,7 +31,7 @@ const String = memo(function String({data,removeString, onChange}){
     
             console.log("Отправка данных на сервер:", updatedData);  // Для отладки
     
-            const response = await fetch("/api/words/" +data.id+ "/update", {
+            const response = await fetch("/api/words/" +data.id + "/update", {
                 method: 'POST',  
                 headers: {
                     'Content-Type': 'application/json',

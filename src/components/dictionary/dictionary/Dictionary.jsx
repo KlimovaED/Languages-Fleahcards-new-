@@ -8,24 +8,14 @@ import { inject, observer } from "mobx-react";
 
 const Dictionary= inject(['WordStore'])(observer(({WordStore})=>{
   const [formError, setFormError] = useState({ input1: false, input2: false, input3: false,input4:false });
-  const [string,setString]= useState({ lingua:'',transcription:'',english:'',russian:'',id:`${(Math.random() + 1).toString(36).substring(7)}`});
+  const [string,setString]= useState({ lingua:'',transcription:'',english:'',russian:'',id:`${(Math.random() + 1).toString(36).substring(7)}`,tags:'', tags_json:''});
 let dictionarys = WordStore.dictionarys;
 
 
  
 
 const saveData = async()=>{
-await fetch("api/words/add",{
-  method:'POST',
-  headers:{
-    'Content-Type':'application/json',
-  },
-  body:JSON.stringify({
-      english: string.english,
-      transcription: string.transcription,
-      russian: string.russian
-  }),
-});
+WordStore.AddCard(string);
 WordStore.addString(string);
 
 }
@@ -61,7 +51,9 @@ const onChangeInputs =(e)=>{
 
  const handleChangeString =  (nextString) =>{
  WordStore.updateString(nextString);
+
   }
+
 
 
   const removeString = async (id,index) =>{
@@ -119,6 +111,7 @@ const onChangeInputs =(e)=>{
             dictionarys.map((dictionary)=>{
                 return(
                   <String
+                  array = {WordStore.cards}
                   data={dictionary}
                   key={dictionary.id}
                   onChange={handleChangeString}

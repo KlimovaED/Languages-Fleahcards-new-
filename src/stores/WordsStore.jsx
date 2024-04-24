@@ -33,6 +33,22 @@ class WordStore {
         })
     });
 
+    AddCard = action((string)=>{
+        return fetch("api/words/add",{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({
+            english: string.english,
+            transcription: string.transcription,
+            russian: string.russian,
+            tags: "",
+            tags_json: "",
+        }),
+      });
+    });
+
     nextCard = action(()=>{
         this.currentIndexId =  this.currentIndexId < this.cards.length-1 ? this.currentIndexId+1 : 0;
         this.showTranslation= false;
@@ -59,6 +75,8 @@ class WordStore {
         dictionary.id === nextString.id ? nextString : dictionary);
         return this.dictionarys = nexStr;
   }
+
+ 
   
 }
 export default  WordStore;
