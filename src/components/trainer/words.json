@@ -31,5 +31,38 @@
     "word":"miracle",
     "transcription":"[’mirəkl]",
     "translation":"чудо"
+},{
+  "id":"6",
+  "lingua":"french",
+  "word":"Bonjour",
+  "transcription":"[bɔ̃ʒuʁ]",
+  "translation":"Добрый день"
+},
+  {
+    "id":"7",
+    "lingua":"french",
+    "word":"amour",
+    "transcription":"[amuʁ]",
+    "translation":"любовь"
+  },
+  {
+    "id":"8",
+    "lingua":"french",
+    "word":"Merci",
+    "transcription":"[mɛʁsi]",
+    "translation":"Спасибо"
+  },
+  {
+    "id":"9",
+    "lingua":"french",
+    "word":"Château",
+    "transcription":"[ʃɑto]",
+    "translation":"Замок"
+  },{
+  "id":"10",
+  "lingua":"french",
+  "word":"École",
+  "transcription":"[ekɔl]",
+  "translation":"Школа"
 }
 ]

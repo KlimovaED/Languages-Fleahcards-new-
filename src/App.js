@@ -1,5 +1,5 @@
 import './App.scss';
-import Header from './components/header/Headers';
+import Header from './components/header/Header';
 import Trainer from './components/trainer/trainer/Trainer';
 import Dictionary from './components/dictionary/dictionary/Dictionary';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
